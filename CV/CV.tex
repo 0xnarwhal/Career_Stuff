@@ -1,90 +1,327 @@
-\documentclass[a4paper,10pt]{article}
-\usepackage[left=0.5in, right=0.5in, top=0.5in, bottom=0.5in]{geometry}
-\usepackage{enumitem}
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+% Resume in Latex
+% Author : Shubham Mazumder
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+
+\documentclass[letterpaper,10pt]{article}
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
 \usepackage{titlesec}
-\usepackage{parskip}
-\usepackage{xcolor}
-\usepackage{fontawesome5}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{soul}
+\usepackage{fontawesome5}
+\input{glyphtounicode}
+\usepackage[margin=0.5in]{geometry}
 
-% Defining the color of choice.
-\definecolor{verdeolivo}{RGB}{81, 125, 118}
+%----------FONT OPTIONS----------
+% Sans-serif Fonts
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault,light]{inter}
+ \usepackage[sfdefault]{noto-sans}
+% \usepackage{roboto}
+% \usepackage[sfdefault,medium]{InriaSans}
+%\usepackage[default]{sourcesanspro}
 
-\titleformat{\section}{\large\bfseries\color{verdeolivo}}{}{0em}{}[\titlerule]
-\titleformat{\subsection}[runin]{\bfseries\color{verdeolivo}}{}{0em}{}[:]
+% Serif Fonts
+% \usepackage{CormorantGaramond}
+% \usepackage{charter}
+
+
+% -------------------------------------
+%----------PAGE SETUP------------------
+% -------------------------------------
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Adjust margins
+% \addtolength{\oddsidemargin}{0.5pt}
+% \addtolength{\evensidemargin}{0.5pt}
+% \addtolength{\textwidth}{0.9in}
+% \addtolength{\topmargin}{-0.6in}
+% \addtolength{\textheight}{1.6in}
+
+% \addtolength{\oddsidemargin}{-.875in}
+% \addtolength{\evensidemargin}{-.875in}
+% \addtolength{\textwidth}{1.75in}
+% \addtolength{\topmargin}{-.875in}
+% \addtolength{\textheight}{1.75in}
+
+% URL style
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+	\vspace{-5pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-4pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+% ----------- Definitions -----------------------
+\def\spaceforrole{ }
+\definecolor{lightyellow}{cmyk}{0.00, 0.05, 0.20, 0.00} % Highlights
+\sethlcolor{lightyellow} % Highlights
+
+%--------------- Custom commands -----------------------
+
+\newcommand{\sectionspace}{
+	\vspace{-20pt}
+}
+
+\newcommand{\subheadingtitlevspace}{
+	\vspace{-3pt}
+}
+
+
+% Resume Item
+\newcommand{\resumeItem}[1]{
+	\item{
+		{#1 \vspace{-4pt}}
+	}
+}
+
+% Titles
+\newcommand{\titleItem}[1]{
+	% \textsl{\textbf{#1}}
+	\textbf{#1}
+}
+
+
+% Highlighting
+\newcommand{\highlight}[1]{
+	\textsl{\textbf{#1}}
+	% \hl{\textsl{\textbf{#1}}}
+	% \textbf{#1}
+	% \textsl{\hl{#1}}
+}
+
+% Resume Subheading
+\newcommand{\resumeSubheading}[4]{
+	\item
+	\begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}l@{}l}     
+		{#1} & \titleItem{#3} | {#2} & \textit{#4}\\
+	\end{tabular*}\vspace{-10pt}
+}
+
+% \newcommand{\resumeSubheading}[4]{
+	%   \item
+	%     \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+		%       \textbf{#1} & #2 \\
+		%       \textit{#3} & \textit{#4} \\
+		%     \end{tabular*}\vspace{-8pt}
+	% }
+
+
+
+% Resume Sub-sub heading
+\newcommand{\resumeSubSubheading}[2]{
+	\item
+	\begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+		\textit{#1} & \textit{#2} \\
+	\end{tabular*}\vspace{-2pt}
+}
+
+% Resume Project Heading
+\newcommand{\resumeProjectHeading}[2]{
+	\item
+	\begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+		#1 & \textit{ #2} \\
+	\end{tabular*}\vspace{-9pt}
+}
+
+%Resume Subheading List
+\newcommand{\resumeSubHeadingListStart}{\subheadingtitlevspace\begin{itemize}[leftmargin=0.15in, label={}]}
+	\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+
+%Resume Item List
+\newcommand{\resumeItemListStart}{
+	% \vspace{-1pt}
+	\begin{itemize}}
+	\newcommand{\resumeItemListEnd}{
+		% \vspace{-6pt}
+	\end{itemize}\vspace{-8pt}}
+
+%-------------------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-------------------------------------------------------
 
 \begin{document}
 	
-	\pagestyle{empty}
+	% -------------------------------------
+	%----------HEADING---------------------
+	% -------------------------------------
 	
-	%\section*{\faIcon{address-card} Contact Information}
-	\begin{center}
-		\textbf{\Huge Amir Adrian Amir Hamzah} \\
-		\vspace{2mm}
-		\faIcon{briefcase} Cyber Security Vulnerability Management
-	\end{center}
+	\begin{flushleft}
+		\textbf{\large Amir Adrian Amir Hamzah} \\    
+		\textit{\faIcon{home} Setiawangsa, Kuala Lumpur} $|$ 
+		\textit{\faIcon{phone} (+60) 17-387-7614} $|$  \\	
+		\href{https://digitisedgarden.com}{{\textit{\faIcon{globe} digitisedgarden.com}}} $|$
+		\href{mailto:amiradrian@protonmail.com}{{\textit{\faIcon{envelope} amiradrian@protonmail.com}}} $|$ 
+		\href{https://linkedin.com/in/amiradrian}{{\textit{\faIcon{linkedin} amiradrian}}} $|$
+		\href{https://github.com/0xnarwhal}{{\textit{\faIcon{github} @0xnarwhal}}}
+		\vspace{-8pt}
+	\end{flushleft}
 	
-	\vspace{4mm}
-	\begin{center}
-		\faIcon{phone} \href{https://wa.me/60173877614}{(+60) 17-287-7614} \hspace{2cm}
-		\faIcon{envelope} \href{mailto:amiradriaan@protonmail.com}{amiradrian@protonmail.com} \hspace{2cm}
-		\faIcon{linkedin} \href{https://www.linkedin.com/in/amiradrian/}{amiradrian}
-	\end{center}
+	% -------------------------------------
+	%---------- PROFESSIONAL SUMMARY ------
+	% -------------------------------------
 	
-	
-	\space
-	\section*{\faIcon{user} Career Statement}
-	As a Cyber Security Specialist, I am driven by a relentless pursuit of improvement, continual learning, and effective problem-solving. With a commitment to quality assurance, I have successfully led my team across diverse facets of cyber security. Through hands-on experience, I've honed a robust skill set, acquired extensive knowledge, and developed resilience in confronting challenges. My passion for staying at the forefront of industry advancements underscores my proactive approach to securing digital landscapes and fostering a culture of innovation within the cyber security domain.
-	
-	\section*{\faIcon{building} Experiences}
-	
-	\subsection*{PETRONAS Digitial Sdn Bhd \hfill Aug 2023 - Actual}
-	\textit{Vulnerability Management}
-	\begin{itemize}
-		\item Led a high-performing team in conducting internal penetration test
-		\item Actively participated in multiple red team processes, enhancing the organization's overall security posture
-		\item Implemented automation for external surface management, streamlining the identification and remediation of potential vulnerabilities.
-		\item Onboarding new tools, ensuring seamless integration into the existing security infrastructure
-		\item Maintained above 90/100 score on security and overall rating of 'A', reflecting a robust security posture.
+	\section{Professional Summary}
+	\vspace{-3pt}
+	\begin{itemize}[leftmargin=0.15in, label={}]
+		{\item{
+				{I am an accomplished data scientist with a strong foundation in analysis, visualization, and machine learning. Currently, I lead a cybersecurity team, specializing in penetration testing and enhancing security postures. Committed to continuous development, I stay ahead of industry trends to contribute effectively in dynamic environments.} \\      
+		}}
 	\end{itemize}
+	\sectionspace
 	
-	\section*{\faIcon{graduation-cap} Education}
 	
-	\subsection*{Monash University \hfill Completed}
-	\textit{BCS Data Science}\\
-	FYP topic "Thumbnail-preserving, Secure, and Reversible Image Perturbation of Medical Images using Generative Adversarial Network ."
+	% -------------------------------------
+	%----------HEADING---------------------
+	% -------------------------------------
 	
-	Key Skills/Coursework: Automation, Data Analysis and Visualization, Parallel Computing, Deep Learning, Web Dev
+	\section{Awards and Certifications}
+	\resumeSubHeadingListStart
+	\resumeProjectHeading
+	{\titleItem{Goethe-Zertifikat B2} \emph{ $|$ Goethe Institut}}{December 2024}
+	\resumeProjectHeading
+	{\titleItem{Certified Red Team Expert (CRTE)} \emph{ $|$ Altered Security}}{October 2024}
+	\resumeProjectHeading
+	{\titleItem{Certified Network Associate (CCNA)} \emph{ $|$ Cisco}}{October 2024}
+	\resumeProjectHeading
+	{\titleItem{Junior Penetration Tester (eJPT)} \emph{ $|$ INE}}{June 2024}
+	\resumeProjectHeading
+	{\titleItem{Certified Cloud Associate (ICCA)} \emph{ $|$ INE}}{June 2024}
+	\resumeSubHeadingListEnd
+	% -------------------------------------
+	%----------TECHNICAL SKILLS------------
+	% -------------------------------------
 	
-	\section*{\faIcon{cogs} Technical Skills}
-	\begin{center}
-		\begin{itemize}[label=\faIcon{check}, itemsep=-3pt]
-			\item Automation
-			\item Penetration Testing
-			\item Machine Learning/Deep Learning
-			\item Quality Assurance
-			\item Web Development
-			\item Process Validation
-		\end{itemize}
-	\end{center}
-	
-	\section*{\faIcon{certificate} Certifications}
-	\begin{itemize}[label=\faIcon{certificate}]
-		\item Certified Red Team Expert - Ongoing
-		\item Junior Penetration Tester (eJPTv2) - Ongoing
+	\section{Technical Skills}
+	\subheadingtitlevspace
+	\begin{itemize}[leftmargin=0.15in, label={}]
+		{\item{
+				\titleItem{Languages}{: Python, C++, SQL (Postgres, MySQL), Java, JavaScript, TypeScript, HTML, XML, JSON, CSS, Sass} \\
+				\titleItem{Frameworks}{: jQuery, React Native, Node.js, Flask, Django, ExpressJS, Bootstrap} \\
+				\titleItem{DevOps and API Tools}{: IIS, Git, Docker, OpenShift, Kubernetes, Azure DevOps, TFS, Octopus Deploy, Swagger, Postman} \\
+				\titleItem{Cloud and Security Tools}{: IBM Cloud, AWS, Azure Cloud, SQL Server, SSIS, SSRS, Linux (Configuring and Managing)} \\
+				\titleItem{Others}{: Data Modeling, Agile (Scrum/Kanban), SOLID, Design Patterns,  Debugging, Root Cause Analysis}
+		}}
 	\end{itemize}
+	\sectionspace
 	
-	\section*{\faIcon{code} Notable Projects}
-	\subsection*{PassCon \hfill Feb 2024 - Current}
-	An open-source passive reconnaissance framework for penetration testing.
 	
-	\subsection*{ATTiny85 - BUSB  \hfill Oct 2023 - Nov 2023}
-	A framework to create malicious USB for social engineering.
 	
-	\section*{\faIcon{language} Languages}
-	\begin{itemize}[label=\faIcon{globe}]
-		\item English - Native
-		\item German - Business Competence
-		\item Bahasa Melayu - Casual Conversation
-	\end{itemize}
+	
+	% -------------------------------------
+	%----------EXPERIENCE------------------
+	% -------------------------------------
+	
+	\section{Experience}
+	\resumeSubHeadingListStart
+	\resumeProjectHeading
+	{\titleItem{{Vulnerability Management Executive}} $|$ \emph{PETRONAS Digital}}{August 2021 --Present}
+	\resumeItemListStart
+	\resumeItem{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.}
+	\resumeItem{In cursus turpis massa tincidunt dui. Cras pulvinar mattis nunc sed blandit libero volutpat sed. Suspendisse potenti nullam ac tortor. Ut consequat semper viverra nam libero justo laoreet sit amet. Feugiat nisl pretium fusce id velit ut tortor pretium.}
+	\resumeItem{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.}
+	\resumeItemListEnd
+	
+	\resumeProjectHeading
+	{\titleItem{{Vulnerability Management Intern}} $|$ \emph{PETRONAS Digital}}{July 2016 -- March 2020}
+	\resumeItemListStart
+	\resumeItem{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.}
+	\resumeItem{In cursus turpis massa tincidunt dui. Cras pulvinar mattis nunc sed blandit libero volutpat sed. Suspendisse potenti nullam ac tortor. }
+	\resumeItem{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.}
+	\resumeItem{In cursus turpis massa tincidunt dui. Cras pulvinar mattis nunc sed blandit libero volutpat sed. Suspendisse potenti nullam ac tortor. Ut consequat semper viverra nam libero justo laoreet sit amet. Feugiat nisl pretium fusce id velit ut tortor pretium. }
+	\resumeItemListEnd
+	
+	\resumeProjectHeading
+	{\titleItem{{Sales Advisor}} $|$ \emph{COS}}{July 2016 -- March 2020}
+	\resumeItemListStart    
+	\resumeItem{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat, generating\highlight{$>$\$100,000k in cost savings.}}
+	\resumeItem{Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua, to save up to\highlight{\$30,000 in development hours.}} 
+	\resumeItemListEnd
+	\resumeSubHeadingListEnd
+	
+	% -------------------------------------
+	%----------EDUCATION-------------------
+	% -------------------------------------
+	
+	% \section{Education}
+	%   \resumeSubHeadingListStart
+	%     \resumeSubheading
+	%       {University of Utah}{Salt Lake City, UT}
+	%       {MS in Computer Science | GPA: 3.86}{January 2021 -- December 2023} 
+	%     \resumeSubheading
+	%       {SRM University}{Chennai, TN, India}
+	%       {Bachelor of Technology in Computer Science and Engineering | GPA: 3.4}{August 2012 -- May 2016}
+	%   \resumeSubHeadingListEnd
+	% \vspace{-12pt}
+	
+	\section{Education}
+	\resumeSubHeadingListStart
+	\resumeSubheading
+	{Monash University}{CGPA: 3.0}
+	{BCS in Data Science}{October 2020 -- July 2023} 
+	\resumeSubheading
+	{Deutsche Schule Kuala Lumpur}{CGPA: 3.2}
+	{Deutsche Internationale Abitur}{August 2017  -- May 2019}
+	\resumeSubHeadingListEnd
+	\vspace{-8pt}
+	
+	% -------------------------------------
+	%----------PROJECTS--------------------
+	% -------------------------------------
+	
+	\section{Projects}    
+	\resumeSubHeadingListStart
+	\resumeProjectHeading
+	{\titleItem{PassCon} $|$ \emph{Django, IBM Cloud, SQLite, Function-as-a-Service, Kubernetes, OpenShift}}{Nov 2023}
+	\resumeItemListStart
+	\resumeItem{In cursus turpis massa tincidunt dui. Cras pulvinar mattis nunc sed blandit libero volutpat sed. Suspendisse potenti nullam ac tortor. }
+	\resumeItem{Ut consequat semper viverra nam libero justo laoreet sit amet. Feugiat nisl pretium fusce id velit ut tortor pretium.}
+	\resumeItemListEnd
+	\resumeProjectHeading
+	{\titleItem{Bad USB Framework} $|$ \emph{Python, numpy. D3.js}}{Spring 2022}
+	\resumeItemListStart
+	\resumeItem{Ut consequat semper viverra nam libero justo laoreet sit amet. Feugiat nisl pretium fusce id velit ut tortor pretium.} 
+	\resumeItem{In cursus turpis massa tincidunt dui. Cras pulvinar mattis nunc sed blandit libero volutpat sed. Suspendisse potenti nullam ac tortor. }
+	\resumeItemListEnd
+	\resumeProjectHeading
+	{\titleItem{IBKR Automatic Stock Investment} $|$ \emph{\LaTeX}}{November 2021}
+	\resumeItemListStart
+	\resumeItem{In cursus turpis massa tincidunt dui. Cras pulvinar mattis nunc sed blandit libero volutpat sed. Suspendisse potenti nullam ac tortor. }
+	\resumeItemListEnd
+	\resumeProjectHeading
+	{\titleItem{Subreddit Sentiment Analysis} $|$ \emph{\LaTeX}}{November 2021}
+	\resumeItemListStart
+	\resumeItem{In cursus turpis massa tincidunt dui. Cras pulvinar mattis nunc sed blandit libero volutpat sed. Suspendisse potenti nullam ac tortor. }
+	\resumeItemListEnd
+	\resumeSubHeadingListEnd
+	
+	%-------------------------------------------
 \end{document}
